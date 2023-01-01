@@ -7,6 +7,7 @@ import com.devsuperior.dscatalog.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -22,7 +23,7 @@ public class UserResource {
     private UserService service;
 
     @GetMapping
-    public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable) {
+    public ResponseEntity<Page<UserDTO>> findAll(@PageableDefault(size = 12, sort = {"FirstName"}) Pageable pageable) {
         Page<UserDTO> list = service.findAllPaged(pageable);
         return ResponseEntity.ok().body(list);
     }

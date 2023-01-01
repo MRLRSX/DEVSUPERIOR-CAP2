@@ -5,6 +5,7 @@ import java.net.URI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.devsuperior.dscatalog.dto.CategoryDTO;
 import com.devsuperior.dscatalog.services.CategoryService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/categories")
 public class CategoryResource {
@@ -27,7 +30,7 @@ public class CategoryResource {
 	private CategoryService service;
 	
 	@GetMapping
-	public ResponseEntity<Page<CategoryDTO>> findAll(Pageable pageable) {
+	public ResponseEntity<Page<CategoryDTO>> findAll(@PageableDefault(size = 12, sort = {"name"}) Pageable pageable) {
 		Page<CategoryDTO> list = service.findAllPaged(pageable);		
 		return ResponseEntity.ok().body(list);
 	}
@@ -39,7 +42,7 @@ public class CategoryResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<CategoryDTO> insert(@RequestBody CategoryDTO dto) {
+	public ResponseEntity<CategoryDTO> insert(@RequestBody @Valid CategoryDTO dto) {
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(dto.getId()).toUri();
@@ -47,7 +50,7 @@ public class CategoryResource {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<CategoryDTO> update(@PathVariable Long id, @RequestBody CategoryDTO dto) {
+	public ResponseEntity<CategoryDTO> update(@PathVariable Long id, @RequestBody @Valid CategoryDTO dto) {
 		dto = service.update(id, dto);
 		return ResponseEntity.ok().body(dto);
 	}
