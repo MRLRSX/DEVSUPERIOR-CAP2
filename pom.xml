@@ -6,8 +6,8 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.4</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>2.7.3</version>
+        <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.devsuperior</groupId>
     <artifactId>dscatalog</artifactId>
@@ -16,7 +16,8 @@
     <description>DSCatalog Bootcamp DevSuperior</description>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
+        <spring-cloud.version>2021.0.3</spring-cloud.version>
     </properties>
 
     <dependencies>
@@ -68,7 +69,17 @@
             <version>2.5.2.RELEASE</version>
         </dependency>
     </dependencies>
-
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <build>
         <plugins>
             <plugin>
