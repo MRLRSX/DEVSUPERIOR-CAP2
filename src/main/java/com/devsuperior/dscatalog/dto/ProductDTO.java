@@ -18,7 +18,7 @@ public class ProductDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	@Size(min = 5, max = 50, message = "Deve ter de 5 a 50 caracter")
+	@Size(min = 5, max = 60, message = "Deve ter de 5 a 50 caracter")
 	@NotBlank(message = "Campo Obrigatório")
 	private String name;
 	private String description;
