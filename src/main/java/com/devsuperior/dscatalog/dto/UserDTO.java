@@ -1,6 +1,5 @@
 package com.devsuperior.dscatalog.dto;
 
-import com.devsuperior.dscatalog.entities.Role;
 import com.devsuperior.dscatalog.entities.User;
 
 import javax.validation.constraints.Email;
@@ -14,7 +13,7 @@ public class UserDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
     @NotBlank(message = "Campo Obrigatório")
-    private String FirstName;
+    private String firstName;
     @NotBlank(message = "Campo Obrigatório")
     private String lastName;
 
@@ -25,14 +24,14 @@ public class UserDTO implements Serializable {
     public UserDTO(){}
     public UserDTO(Long id, String firstName, String lastName, String email) {
         this.id = id;
-        this.FirstName = firstName;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
 
     public UserDTO(User entity) {
         this.id = entity.getId();
-        this.FirstName = entity.getFirstName();
+        this.firstName = entity.getFirstName();
         this.lastName = entity.getLastName();
         this.email = entity.getEmail();
         entity.getRoles().forEach(role -> this.roles.add(new RoleDTO(role)));
@@ -47,11 +46,11 @@ public class UserDTO implements Serializable {
     }
 
     public String getFirstName() {
-        return FirstName;
+        return this.firstName;
     }
 
     public void setFirstName(String firstName) {
-        FirstName = firstName;
+        this.firstName = firstName;
     }
 
     public String getLastName() {
