@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
-import static javax.xml.bind.ContextFinder.logger;
+import javax.xml.bind.*;
 
 @Service
 public class UserService implements UserDetailsService {
